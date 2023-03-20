@@ -1,0 +1,40 @@
+.navlinks {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 1rem;
+    background-color: #6e00ff;
+  }
+  
+  .navlinks li {
+    margin: 0 1rem;
+  }
+  
+  .navlinks a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .navlinks a:hover,
+  .navlinks a.active {
+    color: #f5f5f5;
+  }
+  
+  .active {
+    color: #f5f5f5;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .navlinks {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+    .navlinks li {
+      margin: 0.5rem 1rem;
+    }
+  }
+  
