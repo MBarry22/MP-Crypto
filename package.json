@@ -2,6 +2,7 @@
   "name": "mp-crypto",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://github.com/MBarry22/MP-Crypto",
   "type": "module",
   "scripts": {
     "dev": "vite",
