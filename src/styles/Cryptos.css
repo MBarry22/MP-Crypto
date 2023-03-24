@@ -1,0 +1,119 @@
+.crypto-wrapper {
+    background-color: #fafafa;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 20px;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .crypto-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .crypto-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #212121;
+  }
+  
+  thead:hover{
+    cursor: pointer;
+  }
+  .crypto-sort {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 200px;
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .crypto-sort select {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .crypto-table {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+  }
+  
+  .crypto-table table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .crypto-table th, .crypto-table td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .crypto-table th {
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #666;
+    background-color: #fafafa;
+    position: sticky;
+    top: 0;
+  }
+  
+  .crypto-table tbody tr {
+    transition: background-color 0.2s ease;
+  }
+  
+  .crypto-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .crypto-table tbody td {
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .crypto-table tbody td:first-child {
+    font-weight: bold;
+  }
+  
+  @media (max-width: 768px) {
+    .crypto-table {
+      overflow-x: auto;
+      display: block;
+      width: 100%;
+    }
+  
+    .crypto-table table {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .crypto-title {
+      font-size: 1.5rem;
+    }
+  
+    .crypto-sort select {
+      font-size: 0.9rem;
+    }
+  
+    .crypto-table th {
+      font-size: 0.8rem;
+    }
+  
+    .crypto-table td {
+      font-size: 0.9rem;
+    }
+  }
+  
