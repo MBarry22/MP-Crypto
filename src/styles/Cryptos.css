@@ -87,6 +87,41 @@
     font-weight: bold;
   }
   
+  .crypto-search {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 20px;
+  }
+  
+  .crypto-search input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .crypto-search button {
+    padding: 10px 15px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .crypto-search button:hover {
+    background-color: #3e8e41;
+  }
+  
+  
   @media (max-width: 768px) {
     .crypto-table {
       overflow-x: auto;

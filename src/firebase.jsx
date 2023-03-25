@@ -41,6 +41,7 @@ export const signInWithGoogle = () => {
     localStorage.setItem('email', email);
     localStorage.setItem('photoUrl', photoUrl);
     localStorage.setItem('emailVerified', emailVerified);
+    console.log(user)
   }).catch((error) => {
     // Handle Errors here.
     const errorCode = error.code;

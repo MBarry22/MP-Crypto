@@ -6,6 +6,7 @@ export default function Cryptos(props) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [sortOrder, setSortOrder] = useState('asc');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const fetchData = useCallback(() => {
     axios
@@ -37,10 +38,22 @@ export default function Cryptos(props) {
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
   };
 
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredData = data.filter((crypto) => {
+    return crypto.name.toLowerCase().includes(searchQuery.toLowerCase());
+  });
+
   return (
     <div className="crypto-wrapper">
       <div className="crypto-header">
         <h1 className="crypto-title">Top 100 Crypto's</h1>
+        <div class="crypto-search">
+            <input type="text" placeholder="Search by name..." value={searchQuery} onChange={handleSearch}/>
+        </div>
+
       </div>
       <div className="crypto-body">
         <div className="crypto-table">
@@ -56,7 +69,7 @@ export default function Cryptos(props) {
               </tr>
             </thead>
             <tbody>
-              {data.map((crypto) => (
+              {filteredData.map((crypto) => (
                 <tr key={crypto.id}>
                   <td>{crypto.rank}</td>
                   <td>{crypto.name}</td>

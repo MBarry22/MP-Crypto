@@ -3,6 +3,8 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import '../styles/LandingPage.css';
 import { formatCurrency } from '../helpers/helpers';
+import Footer from './Footer';
+
 
 export default function LandingPage() {
   const [data, setData] = useState([]);
@@ -15,6 +17,7 @@ export default function LandingPage() {
       .then((res) => {
         setData(res.data.data.slice(0, 6));
         setLoading(false);
+        console.log(res.data)
       })
       .catch((err) => {
         console.log(err);
@@ -86,6 +89,7 @@ export default function LandingPage() {
 
       const intervalId = setInterval(updateChart, 5000);
       return () => clearInterval(intervalId);
+
     }
   }, []);
 
@@ -125,7 +129,10 @@ export default function LandingPage() {
           ))}
         </div>
       )}
+      
     </div>
+    
+    
   );
 }
 

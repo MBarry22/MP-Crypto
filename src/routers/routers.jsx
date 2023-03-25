@@ -3,6 +3,7 @@ import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-do
 import LandingPage from '../components/LandingPage';
 import Profile from '../components/Profile';
 import Cryptos from '../components/Cryptos';
+import About from '../components/About';
 
 import { signInWithGoogle, signOut } from '../firebase';
 import '../styles/Routers.css';
@@ -29,6 +30,13 @@ export default function Routers() {
               Home
             </NavLink>
           </li>
+          
+          <li>
+            <NavLink to="/about" activeClassName="active">
+              About
+            </NavLink>
+          </li>
+
           <li>
             <NavLink to="/cryptos" activeClassName="active">
               Cryptos
@@ -43,13 +51,15 @@ export default function Routers() {
                 </NavLink>
               </li>
             <li>
+              < NavLink to="/" activeClassName="active" onClick={handleSignOut}> 
               <button type="button" onClick={handleSignOut} className="login-with-google-btn">
                 Sign out
               </button>
+              </NavLink>
             </li></>
           ) : (
             <li>
-              <button type="button" onClick={handleSignIn} className="login-with-google-btn">
+              <button type="button"  onClick={handleSignIn} className="login-with-google-btn">
                 Sign in with Google
               </button>
             </li>
@@ -68,6 +78,10 @@ export default function Routers() {
 
         <Route path="/cryptos">
           <Cryptos />
+        </Route>
+
+        <Route path="/about">
+          <About />
         </Route>
       </Switch>
     </Router>
