@@ -121,6 +121,10 @@
     background-color: #3e8e41;
   }
   
+  .name a{
+    color: black;
+    text-decoration: none;
+  }
   
   @media (max-width: 768px) {
     .crypto-table {

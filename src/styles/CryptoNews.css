@@ -1,0 +1,40 @@
+.crypto-news-wrapper {
+    padding: 50px;
+  }
+  
+  .crypto-news-title {
+    font-size: 3rem;
+    margin-bottom: 30px;
+  }
+  
+  .crypto-news-body {
+    display: grid;
+    gap: 30px;
+  }
+  
+  .crypto-news-article {
+    display: grid;
+    gap: 10px;
+  }
+  
+  .crypto-news-article-title {
+    font-size: 2rem;
+    margin: 0;
+  }
+  
+  .crypto-news-article-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: gray;
+  }
+  
+  .crypto-news-article-source {
+    font-weight: bold;
+  }
+  
+  .crypto-news-article-description {
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+  

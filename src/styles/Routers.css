@@ -1,105 +1,70 @@
-.navbar {
+.navlinks {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 80px;
-  background-color: #6e00ff;
-  padding: 0 2rem;
-}
-
-.navbar__logo {
-  font-size: 2rem;
-  font-weight: bold;
-  color: white;
-}
-
-.navlinks {
-  display: flex;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
   list-style: none;
-  margin: 0;
-  padding: 0;
 }
 
 .navlinks li {
-  margin: 0 1rem;
+  margin-right: 20px;
+}
+
+.navlinks li:last-child {
+  margin-right: 0;
 }
 
 .navlinks a {
   text-decoration: none;
-  color: white;
-  font-weight: bold;
-  font-size: 1.2rem;
-  transition: color 0.2s ease-in-out;
+  color: #f8f8f8;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 10px;
 }
 
-.navlinks a:hover,
-.navlinks a.active {
-  color: #f5f5f5;
+.navlinks a:hover {
+  color: #000;
 }
 
 .active {
-  color: #f5f5f5;
+  color: #000;
+  border-bottom: 2px solid #000;
 }
 
 .login-with-google-btn {
-  background-color: #fff;
+  background-color: #4285f4;
+  color: #fff;
   border: none;
   border-radius: 4px;
-  color: #6e00ff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 20px;
   cursor: pointer;
-  font-size: 1.2rem;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  margin-left: 20px;
 }
 
-.login-with-google-btn:hover {
-  background-color: #6e00ff;
-  color: #fff;
-}
-
-@media screen and (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    height: auto;
-    padding: 1rem;
-  }
-  
+@media (max-width: 768px) {
   .navlinks {
     flex-direction: column;
-    margin-top: 1rem;
+    align-items: flex-start;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
   }
-  
+
   .navlinks li {
-    margin: 0.5rem 0;
+    margin-right: 0;
+    margin-bottom: 10px;
   }
-  
+
+  .navlinks li:last-child {
+    margin-bottom: 0;
+  }
+
   .login-with-google-btn {
     margin-left: 0;
-    margin-top: 1rem;
+    margin-top: 10px;
   }
-}
-
-/* New styles for sign-in button */
-.google-login-btn {
-  background-color: #fff;
-  color: #6e00ff;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border: 2px solid #6e00ff;
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-}
-
-.google-login-btn:hover {
-  background-color: #6e00ff;
-  color: #fff;
-  border-color: #fff;
-  cursor: pointer;
-}
-
-.navbar__right {
-  display: flex;
-  align-items: center;
 }
