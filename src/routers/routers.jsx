@@ -7,6 +7,9 @@ import About from '../components/About';
 import Favorites from '../components/Favorites';
 import CryptoNews from '../components/CryptoNews';
 import CryptoDetail from '../components/CryptoDetail';
+import EditProfile from '../components/EditProfile';
+
+import MPCrypto from '../assets/images/MPCrypto.png';
 
 import { signInWithGoogle, signOut } from '../firebase';
 import '../styles/Routers.css';
@@ -15,79 +18,93 @@ export default function Routers() {
   const [isSignedIn, setIsSignedIn] = useState(false);
 
   useEffect(() => {
-    const signedInUser = localStorage.getItem('isSignedIn');
+    const signedInUser = localStorage.getItem('email');
     setIsSignedIn(signedInUser);
   }, []);
 
   const handleSignIn = () => {
-    signInWithGoogle();
-    setIsSignedIn(true);
-    localStorage.setItem('isSignedIn', true);
+    try {
+      const signedInUser = signInWithGoogle();
+      if (signedInUser) {
+        setIsSignedIn(true);
+        localStorage.setItem('isSignedIn', true);
+        window.location.reload(true);
+      } else {
+        setIsSignedIn(false);
+        localStorage.setItem('isSignedIn', false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSignOut = () => {
-    signOut();
-    setIsSignedIn(false);
-    localStorage.setItem('isSignedIn', false);
+    try {
+      signOut();
+      setIsSignedIn(false);
+      localStorage.setItem('isSignedIn', false);
+    }
+    catch(error){
+      console.log(error);
+    }
   };
 
   return (
     <Router>
-      <nav>
-        <ul className="navlinks">
-          <li>
-            <NavLink exact to="/" activeClassName="active">
-              Home
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/about" activeClassName="active">
-              About
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/cryptos" activeClassName="active">
-              Cryptos
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/favorites" activeClassName="active">
-              Favorites
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/news" activeClassName="active">
-              News
-            </NavLink>
-          </li>
-
-          {isSignedIn ? (
-            <>
-              <li>
-                <NavLink to="/profile" activeClassName="active">
-                  Profile
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/" activeClassName="active" onClick={handleSignOut}>
-                  <button type="button" onClick={handleSignOut} className="login-with-google-btn">
-                    Sign out
-                  </button>
-                </NavLink>
-              </li>
-            </>
-          ) : (
-            <li>
-              <button type="button" onClick={handleSignIn} className="login-with-google-btn">
-                Sign in with Google
-              </button>
+      <nav className="navbar">
+        <div className="navbar__left">
+          <NavLink to="/" className="navbar__link">
+          <img src={MPCrypto} alt="logo" className="navbar__logo" />
+          </NavLink>
+          
+        </div>
+        <div className="navbar__right">
+          <ul>
+            <li className="navbar__item">
+              <NavLink to="/about" activeClassName="active" className="navbar__link">
+                About
+              </NavLink>
             </li>
-          )}
-        </ul>
+            <li className="navbar__item">
+              <NavLink to="/cryptos" activeClassName="active" className="navbar__link">
+                Cryptos
+              </NavLink>
+            </li>
+            <li className="navbar__item">
+              <NavLink to="/favorites" activeClassName="active" className="navbar__link">
+                Favorites
+              </NavLink>
+            </li>
+            <li className="navbar__item">
+              <NavLink to="/news" activeClassName="active" className="navbar__link">
+                News
+              </NavLink>
+            </li>
+            {isSignedIn && (
+              <>
+                <li className="navbar__item">
+                  <NavLink to="/profile" activeClassName="active" className="navbar__link">
+                    Profile
+                  </NavLink>
+                </li>
+                <li className="navbar__item">
+                  <NavLink to="/" activeClassName="active" onClick={handleSignOut} className="navbar__link">
+                    Sign out
+                  </NavLink>
+                </li>
+              </>
+            )}
+            {!isSignedIn && (
+              <>
+                <NavLink to="/" activeClassName="active" onClick={handleSignIn} className="navbar__link">
+                  <li className="navbar__item">Sign in</li>
+                </NavLink>
+                <li className="navbar__item">
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
       </nav>
 
       <Switch>
@@ -118,7 +135,12 @@ export default function Routers() {
         <Route path="/profile">
           <Profile />
         </Route>
+
+        <Route path="/edit-profile">
+          <EditProfile />
+        </Route>
       </Switch>
     </Router>
   );
 }
+

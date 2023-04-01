@@ -2,14 +2,16 @@ import axios from 'axios';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import '../styles/LandingPage.css';
+import cryptomarket from '../assets/images/cryptomarket.mp4';
+import cryptomarket2 from '../assets/images/cryptomarket2.mp4';
 import { formatCurrency } from '../helpers/helpers';
-import Footer from './Footer';
-
 
 export default function LandingPage() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const chartRef = useRef(null);
+  const [searchText, setSearchText] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
 
   const fetchData = useCallback(() => {
     axios
@@ -17,7 +19,6 @@ export default function LandingPage() {
       .then((res) => {
         setData(res.data.data.slice(0, 6));
         setLoading(false);
-        console.log(res.data)
       })
       .catch((err) => {
         console.log(err);
@@ -31,108 +32,77 @@ export default function LandingPage() {
   }, [fetchData]);
 
   useEffect(() => {
-    if (chartRef.current) {
-      const myChart = new Chart(chartRef.current, {
-        type: 'line',
-        data: {
-          labels: [],
-          datasets: [
-            {
-              label: 'BTC Price (USD)',
-              data: [],
-              borderColor: 'rgba(75, 192, 192, 1)',
-              fill: false,
-            },
-            {
-              label: 'ETH Price (USD)',
-              data: [],
-              borderColor: 'rgba(153, 102, 255, 1)',
-              fill: false,
-            },
-          ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-          plugins: {
-            legend: {
-              display: true,
-              position: 'bottom',
-            },
-          },
-        },
-      });
-
-      const updateChart = () => {
-        Promise.all([
-          axios.get('https://api.coinlore.net/api/ticker/?id=90'),
-          axios.get('https://api.coinlore.net/api/ticker/?id=80'),
-        ])
-          .then((responses) => {
-            const btcData = responses[0].data[0];
-            const ethData = responses[1].data[0];
-            const time = new Date().toLocaleTimeString();
-            const btcPrice = parseFloat(btcData.price_usd).toFixed(2);
-            const ethPrice = parseFloat(ethData.price_usd).toFixed(2);
-            myChart.data.labels.push(time);
-            myChart.data.datasets[0].data.push(btcPrice);
-            myChart.data.datasets[1].data.push(ethPrice);
-            myChart.update();
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      };
-
-      const intervalId = setInterval(updateChart, 5000);
-      return () => clearInterval(intervalId);
-
-    }
-  }, []);
+    setFilteredData(
+      data.filter((coin) =>
+        coin.name.toLowerCase().includes(searchText.toLowerCase())
+      )
+    );
+  }, [data, searchText]);
 
   return (
-    <div className="landing-page">
+    <><div className="landing-page">
       <header className="header">
-        <h1>Crypto Tracker</h1>
+        <h1 className="btn-shine">Stay Ahead of the Game </h1>
+        <h1 className="btn-shine">with MP Crypto</h1>
       </header>
-      <div className="chart-container">
-        <canvas ref={chartRef} className="chart" />
-        <div className="legend">
-          <span className="btc-color"></span>
-          <p>BTC</p>
-          <span className="eth-color"></span>
-          <p>ETH</p>
-        </div>
-      </div>
+
+      <h2 className='top-cryptos'>TOP Cryptos</h2>
       {loading ? (
         <div className="loading">
           <h2>Loading...</h2>
         </div>
       ) : (
-        <div className="card-container">
-          {data.map((coin) => (
-            <div className="card" key={coin.id}>
-              <div className="card-header">
-                <img src={`https://www.cryptocompare.com/${coin.image_url}`} alt="coin" />
+        <div className="crypto-list">
+          {filteredData.map((coin) => (
+            <div className="crypto" key={coin.id}>
+
+              <div className="crypto-body">
                 <h2>{coin.name}</h2>
-              </div>
-              <div className="card-body">
-                <p>Price: {formatCurrency(coin.price_usd)}</p>
-                <p>Market Cap: {formatCurrency(coin.market_cap_usd)}</p>
-                <p>24h Volume: {formatCurrency(coin.volume24)}</p>
-                <p>Change (24h): {coin.percent_change_24h}%</p>
+                <p> {formatCurrency(coin.price_usd)}</p>
+                <p> {formatCurrency(coin.market_cap_usd)}</p>
+                <p> {formatCurrency(coin.volume24)}</p>
+                <p> {coin.percent_change_24h}%</p>
               </div>
             </div>
           ))}
         </div>
       )}
-      
+
     </div>
-    
-    
+    <div className="crypto-information">
+        <h2 className="crypto-information-title">Crypto Information</h2>
+        <div className='crypto-information-left'>
+          <video className='video' autoPlay loop muted>
+            <source src={cryptomarket} type='video/mp4' />
+          </video>
+          <div className='crypto-information-left-text'>
+          <h2>An Introduction to Cryptocurrencies</h2>
+          <p>Cryptocurrencies are a digital form of currency that operate independently of central banks. They use encryption techniques to secure transactions and control the creation of new units. Bitcoin is the most well-known cryptocurrency, but there are many others such as Ethereum, Litecoin, and Ripple. Some people invest in cryptocurrencies as a form of alternative investment, while others use them for online transactions or to avoid traditional banking systems. However, there are also concerns about the volatility and lack of regulation in the cryptocurrency market.</p>
+          </div>
+        </div>
+        <div className='crypto-information-right'>
+        <div className='crypto-information-right-text'>
+          <h2>How to Buy Cryptocurrencies</h2>
+          <p>Buying cryptocurrencies is a simple process. You can buy them directly from an exchange, or you can use a broker. If you want to buy cryptocurrencies directly from an exchange, you will need to create an account and verify your identity. You can then deposit funds into your account and use them to buy cryptocurrencies. If you want to use a broker, you will need to create an account and verify your identity. You can then deposit funds into your account and use them to buy cryptocurrencies. If you want to use a broker, you will need to create an account and verify your identity. You can then deposit funds into your account and use them to buy cryptocurrencies.</p>
+          </div>
+          <video className='video' autoPlay loop muted>
+            <source src={cryptomarket2} type='video/mp4' />
+          </video>
+          </div>
+        <div className='where-to-buy'>
+          <h2>Where to buy Crypto Currencies</h2>
+          <p>There are many exchanges where you can buy cryptocurrencies. Here are some of the most popular:</p>
+          <div className='where-to-buy-links'>
+            <a href='https://www.coinbase.com/' target='_blank' rel='noreferrer'>Coinbase</a>
+            <a href='https://www.binance.com/en' target='_blank' rel='noreferrer'>Binance</a>
+            <a href='https://www.bitstamp.net/' target='_blank' rel='noreferrer'>Bitstamp</a>
+            <a href='https://www.kraken.com/' target='_blank' rel='noreferrer'>Kraken</a>
+            <a href='https://www.bitfinex.com/' target='_blank' rel='noreferrer'>Bitfinex</a>
+            <a href='https://www.bittrex.com/' target='_blank' rel='noreferrer'>Bittrex</a>
+            <a href='https://www.gdax.com/' target='_blank' rel='noreferrer'>GDAX</a>
+            <a href='https://www.coinmama.com/' target='_blank' rel='noreferrer'>Coinmama</a>
+            </div>
+        </div>
+      </div></>
   );
 }
-
