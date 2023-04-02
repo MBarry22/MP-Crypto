@@ -1,4 +1,8 @@
 import "../styles/About.css";
+import real_time_prices from  "../assets/images/real_time_prices.jpg";
+import tracking from "../assets/images/tracking.jpg";
+import news from "../assets/images/news.jpg";
+
 
 export default function About() {
   const placeholderImage = "https://via.placeholder.com/150";
@@ -14,7 +18,7 @@ export default function About() {
         <div className="about-features">
           <div className="about-feature">
             <img
-              src={placeholderImage}
+              src={real_time_prices}
               alt="Feature 1"
               className="about-feature-image"
             />
@@ -25,7 +29,7 @@ export default function About() {
           </div>
           <div className="about-feature">
             <img
-              src={placeholderImage}
+              src={tracking}
               alt="Feature 2"
               className="about-feature-image"
             />
@@ -36,7 +40,7 @@ export default function About() {
           </div>
           <div className="about-feature">
             <img
-              src={placeholderImage}
+              src={news}
               alt="Feature 3"
               className="about-feature-image"
             />
